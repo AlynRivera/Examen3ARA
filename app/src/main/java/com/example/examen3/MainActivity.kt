@@ -44,8 +44,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnRegistrar.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            val nombre = etNombreUsuario.text.toString().trim()
+
+            if (nombre.isEmpty()) {
+                val intent = Intent(this, SignUpActivity::class.java)
+                startActivity(intent)
+                return@setOnClickListener
+            }
+
+            val jugadorExiste = dbHelper.existeJugador(nombre)
+
+            if (jugadorExiste) {
+                Toast.makeText(this, "El usuario ya está registrado", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(this, SignUpActivity::class.java)
+                startActivity(intent)
+            }
         }
+
     }
 }

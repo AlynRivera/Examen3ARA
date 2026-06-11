@@ -22,11 +22,9 @@ class ProfileActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("perfil_jugador", Context.MODE_PRIVATE)
 
-        // Recuperar la última conexión guardada y mostrarla
         val ultimaConexion = prefs.getString("ultima_conexion", "Sin conexiones previas")
         tvUltimaConexion.text = "Última conexión: $ultimaConexion"
 
-        // Guardar la fecha y hora actual como nueva última conexión
         val formatoFecha = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
         val fechaActual = formatoFecha.format(Date())
         prefs.edit().putString("ultima_conexion", fechaActual).apply()

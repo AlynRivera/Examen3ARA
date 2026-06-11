@@ -51,4 +51,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
         return existe
     }
+    fun existeJugador(nombre: String): Boolean {
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_JUGADORES WHERE $COLUMN_NOMBRE = ?"
+        val cursor = db.rawQuery(query, arrayOf(nombre))
+        val existe = cursor.count > 0
+        cursor.close()
+        db.close()
+        return existe
+    }
+
 }
